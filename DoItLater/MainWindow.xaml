@@ -1,0 +1,301 @@
+﻿<Window x:Class="DoItLater.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoItLater"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="410" Width="350"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+    <Canvas>
+
+        <!--pg1-->
+        <Grid Background="Azure" x:Name="Pg1" Width="350">
+            <!--分段-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="180"></RowDefinition>
+                <RowDefinition Height="180"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--標題-->
+            <Grid x:Name="TitleBar" MouseMove="TitleBar_MouseMove" Grid.ColumnSpan="2" Margin="0,0,0.4,168.4" Grid.RowSpan="2">
+                <TextBlock FontSize="30" Margin="5,5,4,5.2" Grid.ColumnSpan="2">代辦事項記錄本</TextBlock>
+                <!--最小化，放大，關閉-->
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="0,0,0,0.2">
+                    <Button Width="20" x:Name="MinBtn"  Click="MinBtn_Click" Background="Transparent" BorderBrush="Transparent" Foreground="Gray" Margin="0,0,0,-0.4">一</Button>
+                    <Button Width="30" x:Name="CloseBtn"  Click="CloseBtn_Click" Background="Transparent" BorderBrush="Transparent" Foreground="Gray">X</Button>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0.4,0.4,0.4">
+                <!--選項-->
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="PastBtn" Click="PastBtn_Click" Margin="10 20 10 10" Height="33" Width="100">過去</Button>
+                    <Button x:Name="FutureBtn" Click="FutureBtn_Click" Margin="10" Height="33" Width="100">未來</Button>
+                    <Button x:Name="TodayBtn" Click="TodayBtn_Click" Margin="10" Height="33" Width="100">今日代辦事項</Button>
+                </StackPanel>
+            </Grid>
+            <!--還沒弄今天的東西-->
+        </Grid>
+        <!--pg2-->
+        <Grid x:Name="Pg2" Background="Azure" Canvas.Left="350">
+            <!--分段-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="310"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--標題-->
+            <Grid x:Name="TitleBar1" MouseMove="TitleBar_MouseMove" Width="350">
+                <TextBlock FontSize="30" Margin="5" TextAlignment="Center">今日代辦事項</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock TextAlignment="Center" Margin="2 52 2 2" FontSize="20" x:Name="TodayDate3"></TextBlock>
+                    <TextBlock TextAlignment="Center" Margin="2 52 2 2" FontSize="20" x:Name="TodayDate2"></TextBlock>
+                    <TextBlock TextAlignment="Center" Margin="2 52 2 2" FontSize="20" x:Name="TodayDate1"></TextBlock>
+                </StackPanel>
+                <!--回去的箭頭-->
+                <Button x:Name="GoBackBtn2_1" Click="GoBackBtn_1_Click" VerticalAlignment="Top">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="20" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="45">
+                                    </RotateTransform>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="GoBackBtn3_1" Click="GoBackBtn_1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="15" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-45">
+                                    </RotateTransform>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="GoBackBtn1_1" Click="GoBackBtn_1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="50" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+            <!--今天內容-->
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="ToDolist_Today" Orientation="Vertical">
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <!--按鈕-->
+            <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20">
+                <Button x:Name="AddBtn1_1" Click="AddBtn_1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Ellipse Width="50" Height="50" Fill="White" Stroke="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn2_1" Click="AddBtn_1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn3_1" Click="AddBtn_1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" Margin="0 -25 -35 0">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="90">
+                                    </RotateTransform>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+        <!--PG3-->
+        <Grid x:Name="Pg3" Background="Azure" Canvas.Left="700" Width="350">
+            <!--分段-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="330"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--標題-->
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="30" Margin="5" TextAlignment="Center">過去代辦事項</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="1" FontSize="20" x:Name="TodayDate3_2">日期</TextBlock>
+                    <TextBlock TextAlignment="Center" Margin="60 0" FontSize="20">事項</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <!--回去的箭頭-->
+            <Button x:Name="GoBackBtn2_2" Click="GoBackBtn_2_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="20" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="45">
+                                </RotateTransform>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="GoBackBtn3_2" Click="GoBackBtn_2_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="15" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="-45">
+                                </RotateTransform>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="GoBackBtn1_2" Click="GoBackBtn_2_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="50" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--過去內容-->
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="0,0,0,-0.2">
+                    <StackPanel x:Name="ToDolist_Past" Orientation="Vertical">
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <!--按鈕-->
+            <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20">
+                <Button x:Name="AddBtn1_2" Click="AddBtn_2_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Ellipse Width="50" Height="50" Fill="White" Stroke="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn2_2" Click="AddBtn_2_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn3_2" Click="AddBtn_2_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" Margin="0 -25 -35 0">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="90">
+                                    </RotateTransform>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+        <!--Pg4-->
+        <Grid x:Name="Pg4" Background="Azure" Canvas.Left="1050">
+            <!--分段-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="330"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--標題-->
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="30" Margin="5" TextAlignment="Center">未來代辦事項</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="1" FontSize="20" x:Name="TodayDate_Future">日期</TextBlock>
+                    <TextBlock TextAlignment="Center" Margin="60 0" FontSize="20">事項</TextBlock>
+                </StackPanel>
+                <Rectangle Width="350" Height="1" Fill="Black"/>
+            </StackPanel>
+            <!--回去的箭頭-->
+            <Button x:Name="GoBackBtn2_3" Click="GoBackBtn_3_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="20" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="45">
+                                </RotateTransform>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="GoBackBtn3_3" Click="GoBackBtn_3_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="15" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform Angle="-45">
+                                </RotateTransform>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="GoBackBtn1_3" Click="GoBackBtn_3_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Rectangle Width="50" Height="5" Margin="10 20 10 10" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="Black">
+                        </Rectangle>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--未來內容-->
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="ToDolist_Future" Orientation="Vertical">
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <!--按鈕-->
+            <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20">
+                <Button x:Name="AddBtn1_3" Click="AddBtn_3_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Ellipse Width="50" Height="50" Fill="White" Stroke="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn2_3" Click="AddBtn_3_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="AddBtn3_3" Click="AddBtn_3_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="30" Height="5" Fill="Black" Margin="0 -25 -35 0">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="90">
+                                    </RotateTransform>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+        <Rectangle Width="1400" Height="1" Fill="Black" Margin="0,50,0,10" />
+    </Canvas>
+</Window>
